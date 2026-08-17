@@ -48,6 +48,12 @@ class SiteSettingSeeder extends Seeder
                 'site_logo' => '',
                 'site_favicon' => '',
             ],
+            'tracking' => [
+                'fb_pixel_enabled' => '0',
+                'fb_pixel_id' => '',
+                'ga_enabled' => '0',
+                'ga_measurement_id' => '',
+            ],
         ];
 
         foreach ($settings as $group => $items) {

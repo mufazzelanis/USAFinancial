@@ -123,5 +123,20 @@
     @endif
 
     @include('partials.site-footer')
+    <x-tracking-scripts />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.Tracking) {
+                Tracking.event('ViewContent', 'view_item', {
+                    content_name: @js($plan->name),
+                    content_ids: [@js((string) $plan->id)],
+                    content_type: 'product',
+                    currency: 'GBP',
+                    value: @js((float) $plan->price),
+                });
+            }
+        });
+    </script>
 </body>
 </html>

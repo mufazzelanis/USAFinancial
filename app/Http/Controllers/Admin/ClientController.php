@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class ClientController extends Controller
@@ -44,7 +45,7 @@ class ClientController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'company' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:40'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['required', Password::defaults()],
             'plan_id' => ['nullable', 'exists:plans,id'],
             'account_manager_id' => ['nullable', 'exists:staff_members,id'],
         ]);

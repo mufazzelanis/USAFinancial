@@ -26,6 +26,8 @@ class SettingController extends Controller
         'address' => 'textarea',
         'whatsapp_message' => 'textarea',
         'whatsapp_enabled' => 'checkbox',
+        'fb_pixel_enabled' => 'checkbox',
+        'ga_enabled' => 'checkbox',
         'phone' => 'tel',
         'email' => 'email',
         'social_facebook' => 'url',
@@ -70,6 +72,14 @@ class SettingController extends Controller
         'social_twitter' => ['placeholder' => 'https://x.com/yourhandle', 'help' => null],
         'social_linkedin' => ['placeholder' => 'https://linkedin.com/company/yourcompany', 'help' => null],
         'social_instagram' => ['placeholder' => 'https://instagram.com/yourhandle', 'help' => null],
+        'fb_pixel_id' => [
+            'placeholder' => 'e.g. 1234567890123456',
+            'help' => 'Meta Events Manager → Data Sources → your Pixel → Settings. Numbers only.',
+        ],
+        'ga_measurement_id' => [
+            'placeholder' => 'e.g. G-XXXXXXXXXX',
+            'help' => 'Google Analytics → Admin → Data Streams → your web stream → Measurement ID.',
+        ],
     ];
 
     public function edit(): View
@@ -91,6 +101,7 @@ class SettingController extends Controller
             'countries' => collect(config('countries'))->sortBy('name'),
             'logoUrl' => $logoPath ? Storage::disk('public')->url($logoPath) : null,
             'faviconUrl' => $faviconPath ? Storage::disk('public')->url($faviconPath) : null,
+            'metaCapiConfigured' => filled(config('services.meta_capi.access_token')),
         ]);
     }
 
@@ -101,6 +112,8 @@ class SettingController extends Controller
     private const VALIDATION_RULES = [
         'whatsapp_number' => ['regex:/^0*[0-9]{6,12}$/'],
         'email' => ['email:filter'],
+        'fb_pixel_id' => ['regex:/^[0-9]{5,20}$/'],
+        'ga_measurement_id' => ['regex:/^G-[A-Z0-9]{4,15}$/i'],
     ];
 
     public function update(Request $request): RedirectResponse
@@ -123,6 +136,8 @@ class SettingController extends Controller
             'settings.whatsapp_country.in' => 'Please choose a valid country.',
             'settings.whatsapp_number.regex' => 'The WhatsApp number should be your local number only — digits, no country code, no leading 0 needed (it will be stripped automatically).',
             'settings.email.email' => 'Please enter a valid email address.',
+            'settings.fb_pixel_id.regex' => 'A Meta Pixel ID is numbers only (find it in Events Manager).',
+            'settings.ga_measurement_id.regex' => 'A Google Analytics Measurement ID looks like G-XXXXXXXXXX.',
         ]);
 
         foreach ($validated['settings'] ?? [] as $key => $value) {

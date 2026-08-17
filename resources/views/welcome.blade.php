@@ -424,6 +424,7 @@
                         href="https://wa.me/{{ \App\Models\SiteSetting::whatsappNumber() }}?text={{ urlencode($settings['whatsapp_message'] ?? "Hi, I'd like to know more about your services.") }}"
                         target="_blank"
                         rel="noopener"
+                        onclick="window.Tracking && Tracking.event('Contact', 'contact', { content_name: 'Contact Section WhatsApp Card' })"
                         class="group relative mt-8 flex items-center gap-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#075E54] to-[#25D366] p-5 shadow-lg shadow-[#25D366]/25 transition hover:-translate-y-0.5 hover:shadow-xl"
                     >
                         <span class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/15">
@@ -504,5 +505,20 @@
     </section>
 
     @include('partials.site-footer')
+    <x-tracking-scripts />
+
+    @if (session('quote_success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.Tracking) {
+                    Tracking.event('Lead', 'generate_lead', {
+                        content_name: @js(session('quote_plan_name') ?? 'General enquiry'),
+                        currency: 'GBP',
+                        value: @js(session('quote_plan_price')),
+                    }, @js(session('quote_event_id')));
+                }
+            });
+        </script>
+    @endif
 </body>
 </html>

@@ -35,4 +35,18 @@ return [
         ],
     ],
 
+    // Meta (Facebook) Conversions API — server-side event tracking, deduplicated
+    // with the browser Pixel via a shared event_id. The Pixel ID itself is public
+    // (it's visible in every page's source) and lives in admin Site Settings, but
+    // the access token is a real secret with write access to your ad account's
+    // event data — it belongs in .env only, never in the database or an admin
+    // form. Generate it in Meta Events Manager > Data Sources > your Pixel >
+    // Settings > Conversions API > Generate Access Token.
+    'meta_capi' => [
+        'access_token' => env('FACEBOOK_CAPI_ACCESS_TOKEN'),
+        // Optional: paste a Test Event Code from Events Manager > Test Events
+        // while verifying setup; remove it again once you've confirmed events arrive.
+        'test_event_code' => env('FACEBOOK_CAPI_TEST_EVENT_CODE'),
+    ],
+
 ];

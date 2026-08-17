@@ -30,6 +30,7 @@
                 href="https://wa.me/{{ $digits }}?text={{ urlencode($message) }}"
                 target="_blank"
                 rel="noopener"
+                onclick="window.Tracking && Tracking.event('Contact', 'contact', { content_name: @js($heading) })"
                 class="group mt-8 inline-flex items-center gap-3 rounded-full bg-white {{ $compact ? 'px-7 py-3.5 text-sm' : 'px-10 py-5 text-lg' }} font-extrabold text-[#075E54] shadow-xl transition hover:scale-105 hover:shadow-2xl"
             >
                 <svg class="{{ $compact ? 'h-5 w-5' : 'h-6 w-6' }} text-[#25D366]" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.31.65 4.47 1.78 6.31L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm6.98 17.02c-.29.82-1.7 1.57-2.35 1.66-.6.09-1.36.13-2.2-.14-.5-.16-1.15-.38-1.99-.74-3.5-1.51-5.78-5.05-5.96-5.29-.17-.24-1.43-1.9-1.43-3.63s.92-2.58 1.24-2.93c.33-.35.71-.44.95-.44.24 0 .48 0 .69.01.22.01.52-.08.81.62.29.72 1 2.45 1.09 2.63.09.18.14.39.03.63-.11.24-.17.39-.34.6-.17.21-.36.47-.51.63-.17.18-.35.37-.15.72.2.35.9 1.48 1.93 2.4 1.33 1.18 2.44 1.55 2.79 1.72.35.18.56.15.77-.09.2-.24.87-1.01 1.1-1.36.23-.35.46-.29.77-.18.32.12 2.02.95 2.37 1.13.35.17.58.26.66.4.1.15.1.86-.19 1.68Z"/></svg>

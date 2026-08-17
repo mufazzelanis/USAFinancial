@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/plans/{plan:slug}', [PlanPageController::class, 'show'])->name('plans.show');
-Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
+Route::post('/quote', [QuoteController::class, 'store'])->middleware('throttle:8,1,quote')->name('quote.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:customer'])->prefix('portal')->name('customer.'
     Route::get('/', [CustomerDashboardController::class, 'index'])->name('dashboard');
     Route::get('/requests', [ServiceRequestController::class, 'index'])->name('requests.index');
     Route::get('/requests/create', [ServiceRequestController::class, 'create'])->name('requests.create');
-    Route::post('/requests', [ServiceRequestController::class, 'store'])->name('requests.store');
+    Route::post('/requests', [ServiceRequestController::class, 'store'])->middleware('throttle:15,1,service-request')->name('requests.store');
     Route::get('/requests/{serviceRequest}', [ServiceRequestController::class, 'show'])->name('requests.show');
 });
 

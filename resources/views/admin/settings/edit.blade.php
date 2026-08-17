@@ -70,6 +70,22 @@
         @foreach ($settings as $group => $items)
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                 <h3 class="mb-4 text-sm font-bold uppercase tracking-wide text-slate-500">{{ str($group)->headline() }}</h3>
+
+                @if ($group === 'tracking')
+                    <div class="mb-5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-600">
+                        <p class="font-semibold text-slate-700">How this works</p>
+                        <p class="mt-1">The Pixel ID and Measurement ID below are safe to store here — they're public identifiers that appear in your page source anyway. Visitors are shown a cookie consent banner first; tracking scripts only load after they accept.</p>
+                        <p class="mt-2 flex items-center gap-1.5">
+                            <span @class(['h-2 w-2 rounded-full shrink-0', 'bg-green-500' => $metaCapiConfigured, 'bg-amber-400' => !$metaCapiConfigured])></span>
+                            @if ($metaCapiConfigured)
+                                <span class="font-semibold text-green-700">Server-side lead tracking (Conversions API) is configured.</span>
+                            @else
+                                <span><span class="font-semibold text-amber-700">Server-side lead tracking isn't configured yet.</span> For accurate, ad-blocker-proof lead data, add <code class="rounded bg-slate-200 px-1 py-0.5">FACEBOOK_CAPI_ACCESS_TOKEN</code> to your server's <code class="rounded bg-slate-200 px-1 py-0.5">.env</code> file (Meta Events Manager → Data Sources → your Pixel → Settings → Conversions API). This is an access token, not a page ID, so it's kept out of the database and admin forms for security.</span>
+                            @endif
+                        </p>
+                    </div>
+                @endif
+
                 <div class="grid gap-5 sm:grid-cols-2">
                     @foreach ($items as $setting)
                         @continue($setting->key === 'whatsapp_number')
