@@ -42,7 +42,11 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        // 'is_active' => true is an extra query constraint here, not a plain credential:
+        // Auth::attempt's default provider requires every given field to match, so a
+        // deactivated account fails to authenticate exactly like a wrong password would
+        // (same generic error message — doesn't reveal the account exists but is disabled).
+        if (! Auth::attempt($this->only('email', 'password') + ['is_active' => true], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

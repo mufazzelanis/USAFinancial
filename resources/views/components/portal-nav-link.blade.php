@@ -17,11 +17,11 @@ $icons = [
 $path = $icons[$icon] ?? $icons['home'];
 @endphp
 
-<a href="{{ $href }}" @class([
+<a href="{{ $href }}" {{ $attributes->class([
     'flex items-center gap-3 rounded-lg px-3 py-2.5 transition',
     'bg-white/10 text-white font-semibold' => $active,
     'text-white/60 hover:bg-white/5 hover:text-white' => ! $active,
-])>
+]) }}>
     <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $path }}" /></svg>
     <span>{{ $slot }}</span>
 </a>

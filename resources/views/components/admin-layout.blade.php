@@ -38,6 +38,7 @@
                 <x-portal-nav-link :href="route('admin.staff.index')" :active="request()->routeIs('admin.staff.*')" icon="user">Team / Staff</x-portal-nav-link>
 
                 <p class="px-3 pt-4 pb-1 text-[11px] font-semibold uppercase tracking-widest text-white/30">Account</p>
+                <x-portal-nav-link :href="route('admin.admin-users.index')" :active="request()->routeIs('admin.admin-users.*')" icon="cog">Admin Users</x-portal-nav-link>
                 <x-portal-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" icon="user">My Profile</x-portal-nav-link>
                 <x-portal-nav-link :href="route('home')" icon="globe">View Website</x-portal-nav-link>
             </nav>
@@ -76,19 +77,27 @@
                 <div class="absolute left-0 top-0 h-full w-72 overflow-y-auto bg-navy-900 text-white p-6" @click.outside="mobileNav = false">
                     <x-brand-mark dark size="h-9 w-9" />
                     <nav class="mt-8 space-y-1 text-sm">
-                        <x-portal-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" icon="grid">Dashboard</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.plans.index')" :active="request()->routeIs('admin.plans.*')" icon="currency">Pricing Plans</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.hourly-services.index')" :active="request()->routeIs('admin.hourly-services.*')" icon="clock">Per-Hour Services</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.payroll-tiers.index')" :active="request()->routeIs('admin.payroll-tiers.*')" icon="users">Payroll Tiers</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.integrations.index')" :active="request()->routeIs('admin.integrations.*')" icon="link">Integrations & POS</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.payment-gateways.index')" :active="request()->routeIs('admin.payment-gateways.*')" icon="currency">Payment Gateways</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.footer-links.index')" :active="request()->routeIs('admin.footer-links.*')" icon="link">Footer Links</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.leads.index')" :active="request()->routeIs('admin.leads.*')" icon="inbox">Leads</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.clients.index')" :active="request()->routeIs('admin.clients.*')" icon="users">Clients</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.requests.index')" :active="request()->routeIs('admin.requests.*')" icon="clipboard">Service Requests</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.staff.index')" :active="request()->routeIs('admin.staff.*')" icon="user">Team / Staff</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('admin.settings.edit')" :active="request()->routeIs('admin.settings.*')" icon="cog">Site Settings</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('home')" icon="globe">View Website</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" icon="grid">Dashboard</x-portal-nav-link>
+
+                        <p class="px-3 pt-4 pb-1 text-[11px] font-semibold uppercase tracking-widest text-white/30">Website Content</p>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.plans.index')" :active="request()->routeIs('admin.plans.*')" icon="currency">Pricing Plans</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.hourly-services.index')" :active="request()->routeIs('admin.hourly-services.*')" icon="clock">Per-Hour Services</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.payroll-tiers.index')" :active="request()->routeIs('admin.payroll-tiers.*')" icon="users">Payroll Tiers</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.integrations.index')" :active="request()->routeIs('admin.integrations.*')" icon="link">Integrations & POS</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.payment-gateways.index')" :active="request()->routeIs('admin.payment-gateways.*')" icon="currency">Payment Gateways</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.footer-links.index')" :active="request()->routeIs('admin.footer-links.*')" icon="link">Footer Links</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.settings.edit')" :active="request()->routeIs('admin.settings.*')" icon="cog">Site Settings</x-portal-nav-link>
+
+                        <p class="px-3 pt-4 pb-1 text-[11px] font-semibold uppercase tracking-widest text-white/30">Operations</p>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.leads.index')" :active="request()->routeIs('admin.leads.*')" icon="inbox">Leads</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.clients.index')" :active="request()->routeIs('admin.clients.*')" icon="users">Clients</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.requests.index')" :active="request()->routeIs('admin.requests.*')" icon="clipboard">Service Requests</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.staff.index')" :active="request()->routeIs('admin.staff.*')" icon="user">Team / Staff</x-portal-nav-link>
+
+                        <p class="px-3 pt-4 pb-1 text-[11px] font-semibold uppercase tracking-widest text-white/30">Account</p>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('admin.admin-users.index')" :active="request()->routeIs('admin.admin-users.*')" icon="cog">Admin Users</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" icon="user">My Profile</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('home')" icon="globe">View Website</x-portal-nav-link>
                     </nav>
                 </div>
             </div>
@@ -97,6 +106,11 @@
                 @if (session('status'))
                     <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
                         {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                        {{ session('error') }}
                     </div>
                 @endif
                 @if ($errors->any())

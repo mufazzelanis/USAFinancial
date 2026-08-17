@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FooterLinkController;
@@ -57,6 +58,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('payment-gateways', PaymentGatewayController::class)->except('show');
     Route::resource('staff', StaffMemberController::class)->except('show');
     Route::resource('footer-links', FooterLinkController::class)->except('show');
+    Route::resource('admin-users', AdminUserController::class)->except('show');
 
     Route::get('/leads', [LeadController::class, 'index'])->name('leads.index');
     Route::get('/leads/{lead}', [LeadController::class, 'show'])->name('leads.show');

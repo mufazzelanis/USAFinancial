@@ -48,14 +48,4 @@
             </div>
         </div>
     </div>
-
-    <div class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-lg font-bold text-navy-900">Quick Actions</h3>
-        <div class="mt-4 flex flex-wrap gap-3">
-            <a href="{{ route('admin.plans.create') }}" class="rounded-full bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-800">+ New Plan</a>
-            <a href="{{ route('admin.clients.create') }}" class="rounded-full bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-800">+ New Client</a>
-            <a href="{{ route('admin.staff.create') }}" class="rounded-full bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-800">+ New Staff Member</a>
-            <a href="{{ route('admin.settings.edit') }}" class="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-navy-900 hover:bg-slate-50">Edit Site Content</a>
-        </div>
-    </div>
 </x-admin-layout>

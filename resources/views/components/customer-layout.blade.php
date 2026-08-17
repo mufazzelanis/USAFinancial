@@ -62,10 +62,10 @@
                 <div class="absolute left-0 top-0 h-full w-64 bg-navy-900 text-white p-6" @click.outside="mobileNav = false">
                     <x-brand-mark dark size="h-9 w-9" />
                     <nav class="mt-8 space-y-1 text-sm">
-                        <x-portal-nav-link :href="route('customer.dashboard')" :active="request()->routeIs('customer.dashboard')" icon="home">Dashboard</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('customer.requests.index')" :active="request()->routeIs('customer.requests.*')" icon="clipboard">Service Requests</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('profile.edit')" icon="user">My Profile</x-portal-nav-link>
-                        <x-portal-nav-link :href="route('home')" icon="globe">Back to Website</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('customer.dashboard')" :active="request()->routeIs('customer.dashboard')" icon="home">Dashboard</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('customer.requests.index')" :active="request()->routeIs('customer.requests.*')" icon="clipboard">Service Requests</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" icon="user">My Profile</x-portal-nav-link>
+                        <x-portal-nav-link @click="mobileNav = false" :href="route('home')" icon="globe">Back to Website</x-portal-nav-link>
                     </nav>
                 </div>
             </div>
