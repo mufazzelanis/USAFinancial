@@ -24,8 +24,8 @@
 
 {{-- Header --}}
 <header class="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
-        <a href="{{ route('home') }}"><x-brand-mark /></a>
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
+        <a href="{{ route('home') }}" class="shrink-0"><x-brand-mark size="h-16 w-auto max-w-[260px]" /></a>
 
         <nav class="hidden items-center gap-8 text-sm font-semibold text-navy-900 lg:flex">
             <a href="{{ route('home') }}#package" class="hover:text-gold-600">Package</a>

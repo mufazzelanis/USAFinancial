@@ -1,4 +1,5 @@
-@props(['dark' => false, 'size' => 'h-10 w-10'])
+{{-- See brand-logo.blade.php: $size must stay "h-N w-auto max-w-[..]", never a square "h-N w-N". --}}
+@props(['dark' => false, 'size' => 'h-10 w-auto max-w-[180px]'])
 
 @php
     $hasCustomLogo = filled(\App\Models\SiteSetting::get('site_logo'));

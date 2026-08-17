@@ -153,7 +153,7 @@ class SettingController extends Controller
 
     public function uploadLogo(Request $request): RedirectResponse
     {
-        return $this->uploadBrandingImage($request, 'site_logo', maxKb: 1024);
+        return $this->uploadBrandingImage($request, 'site_logo', maxKb: 5120);
     }
 
     public function removeLogo(): RedirectResponse

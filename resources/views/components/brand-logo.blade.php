@@ -1,4 +1,13 @@
-@props(['class' => 'h-10 w-10'])
+{{--
+    Renders the site logo (or the default monogram) sized by HEIGHT only.
+    Never force a square "w-N h-N" here — uploaded logos are usually wide
+    wordmarks, and a square box combined with object-contain squeezes them
+    down to a sliver to keep width inside the box. Pass a class like
+    "h-10 w-auto max-w-[180px]": height pins the size, width follows the
+    logo's own aspect ratio, and max-w just stops an extreme wide logo from
+    overrunning tight layouts (sidebar, mobile header).
+--}}
+@props(['class' => 'h-10 w-auto max-w-[180px]'])
 
 @php
     $logoPath = \App\Models\SiteSetting::get('site_logo');

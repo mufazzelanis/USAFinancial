@@ -6,20 +6,73 @@
     <div class="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
         <h3 class="mb-4 text-sm font-bold uppercase tracking-wide text-slate-500">Branding</h3>
         <div class="grid gap-8 sm:grid-cols-2">
-            <div>
+            <div x-data="{ preview: null }">
                 <p class="mb-2 text-sm font-semibold text-slate-700">Site Logo</p>
-                <div class="flex items-start gap-4 rounded-xl border border-dashed border-slate-300 p-4">
-                    <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-50">
-                        @if ($logoUrl)
-                            <img src="{{ $logoUrl }}" alt="Site logo" class="max-h-full max-w-full object-contain">
-                        @else
-                            <x-brand-logo class="h-10 w-10" />
-                        @endif
+                <div class="space-y-4 rounded-xl border border-dashed border-slate-300 p-4">
+
+                    {{-- Large preview: sized by height only, so a wide wordmark logo is
+                         never squeezed into a square and shown full-size. --}}
+                    <div class="flex h-24 items-center justify-center overflow-hidden rounded-lg bg-slate-50 px-3">
+                        <template x-if="preview">
+                            <img :src="preview" alt="New logo preview" class="h-full w-auto max-w-full object-contain">
+                        </template>
+                        <template x-if="!preview">
+                            @if ($logoUrl)
+                                <img src="{{ $logoUrl }}" alt="Site logo" class="h-full w-auto max-w-full object-contain">
+                            @else
+                                <x-brand-logo class="h-16 w-auto max-w-full" />
+                            @endif
+                        </template>
                     </div>
+
+                    {{-- Contextual previews: exactly how the logo will look where it actually
+                         appears on the site, so you don't have to guess and reload pages. --}}
+                    <div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="flex h-14 items-center justify-center rounded-lg border border-slate-200 bg-white px-3">
+                                <template x-if="preview">
+                                    <img :src="preview" class="h-9 w-auto max-w-[150px] object-contain">
+                                </template>
+                                <template x-if="!preview">
+                                    @if ($logoUrl)
+                                        <img src="{{ $logoUrl }}" class="h-9 w-auto max-w-[150px] object-contain">
+                                    @else
+                                        <x-brand-logo class="h-9 w-auto max-w-[150px]" />
+                                    @endif
+                                </template>
+                            </div>
+                            <div class="flex h-14 items-center justify-center rounded-lg border border-navy-900 bg-navy-900 px-3">
+                                <template x-if="preview">
+                                    <img :src="preview" class="h-9 w-auto max-w-[150px] object-contain">
+                                </template>
+                                <template x-if="!preview">
+                                    @if ($logoUrl)
+                                        <img src="{{ $logoUrl }}" class="h-9 w-auto max-w-[150px] object-contain">
+                                    @else
+                                        <x-brand-logo class="h-9 w-auto max-w-[150px]" />
+                                    @endif
+                                </template>
+                            </div>
+                        </div>
+                        <p class="mt-1 flex justify-between text-[11px] text-slate-400">
+                            <span>Header preview</span><span>Sidebar preview</span>
+                        </p>
+                    </div>
+
                     <div class="min-w-0 flex-1 space-y-3">
                         <form method="POST" action="{{ route('admin.settings.logo.upload') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-2">
                             @csrf
-                            <input type="file" name="file" accept="image/*" required class="w-full text-xs text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-navy-900 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-navy-800 sm:w-auto">
+                            <input
+                                type="file" name="file" accept="image/*" required
+                                @change="
+                                    const f = $event.target.files[0];
+                                    if (!f) { preview = null; return; }
+                                    const reader = new FileReader();
+                                    reader.onload = e => preview = e.target.result;
+                                    reader.readAsDataURL(f);
+                                "
+                                class="w-full text-xs text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-navy-900 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-navy-800 sm:w-auto"
+                            >
                             <button class="shrink-0 rounded-lg bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-navy-800">Upload</button>
                         </form>
                         @if ($logoUrl)
@@ -28,7 +81,7 @@
                                 <button class="text-xs font-semibold text-red-600 hover:text-red-700">Remove logo</button>
                             </form>
                         @endif
-                        <p class="text-xs text-slate-400">PNG, JPG or SVG, up to 1MB. Falls back to the default monogram when removed.</p>
+                        <p class="text-xs text-slate-400">PNG, JPG or SVG, up to 5MB. Wide/rectangular logos are fine — they scale by height, never squeezed into a square. Pick a file above to preview it instantly before uploading. Falls back to the default monogram when removed.</p>
                     </div>
                 </div>
             </div>

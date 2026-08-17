@@ -17,7 +17,7 @@
         {{-- Sidebar --}}
         <aside class="hidden lg:flex lg:flex-col bg-navy-900 text-white">
             <div class="px-6 py-6 border-b border-white/10">
-                <a href="{{ route('home') }}"><x-brand-mark dark size="h-9 w-9" /></a>
+                <a href="{{ route('home') }}"><x-brand-mark dark size="h-11 w-auto max-w-[190px]" /></a>
             </div>
             <nav class="flex-1 px-4 py-6 space-y-1 text-sm">
                 <x-portal-nav-link :href="route('customer.dashboard')" :active="request()->routeIs('customer.dashboard')" icon="home">Dashboard</x-portal-nav-link>
@@ -60,7 +60,7 @@
             <div x-cloak x-show="mobileNav" class="fixed inset-0 z-40 lg:hidden" x-transition.opacity>
                 <div class="absolute inset-0 bg-black/50" @click="mobileNav = false"></div>
                 <div class="absolute left-0 top-0 h-full w-64 bg-navy-900 text-white p-6" @click.outside="mobileNav = false">
-                    <x-brand-mark dark size="h-9 w-9" />
+                    <x-brand-mark dark size="h-11 w-auto max-w-[190px]" />
                     <nav class="mt-8 space-y-1 text-sm">
                         <x-portal-nav-link @click="mobileNav = false" :href="route('customer.dashboard')" :active="request()->routeIs('customer.dashboard')" icon="home">Dashboard</x-portal-nav-link>
                         <x-portal-nav-link @click="mobileNav = false" :href="route('customer.requests.index')" :active="request()->routeIs('customer.requests.*')" icon="clipboard">Service Requests</x-portal-nav-link>

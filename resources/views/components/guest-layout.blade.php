@@ -14,7 +14,7 @@
 <body class="font-sans text-slate-900 antialiased">
     <div class="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-navy-50 via-white to-white px-4 py-10">
         <a href="{{ route('home') }}" class="mb-8">
-            <x-brand-mark size="h-12 w-12" />
+            <x-brand-mark size="h-16 w-auto max-w-[260px]" />
         </a>
 
         <div class="w-full sm:max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white px-6 py-7 shadow-lg shadow-navy-900/5 sm:px-8">
