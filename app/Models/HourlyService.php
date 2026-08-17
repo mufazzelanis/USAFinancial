@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class HourlyService extends Model
+{
+    protected $fillable = [
+        'name', 'slug', 'icon', 'price_from', 'currency', 'sort_order', 'is_active',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+            'price_from' => 'decimal:2',
+        ];
+    }
+}
