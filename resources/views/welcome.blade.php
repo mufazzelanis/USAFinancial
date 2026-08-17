@@ -418,6 +418,28 @@
                         </div>
                     @endif
                 </div>
+
+                @if (($settings['whatsapp_enabled'] ?? '1') === '1' && \App\Models\SiteSetting::whatsappNumber())
+                    <a
+                        href="https://wa.me/{{ \App\Models\SiteSetting::whatsappNumber() }}?text={{ urlencode($settings['whatsapp_message'] ?? "Hi, I'd like to know more about your services.") }}"
+                        target="_blank"
+                        rel="noopener"
+                        class="group relative mt-8 flex items-center gap-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#075E54] to-[#25D366] p-5 shadow-lg shadow-[#25D366]/25 transition hover:-translate-y-0.5 hover:shadow-xl"
+                    >
+                        <span class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/15">
+                            <span class="absolute inset-0 animate-ping rounded-full bg-white/20"></span>
+                            <svg class="relative h-9 w-9 text-white" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.31.65 4.47 1.78 6.31L4 29l7.86-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm6.98 17.02c-.29.82-1.7 1.57-2.35 1.66-.6.09-1.36.13-2.2-.14-.5-.16-1.15-.38-1.99-.74-3.5-1.51-5.78-5.05-5.96-5.29-.17-.24-1.43-1.9-1.43-3.63s.92-2.58 1.24-2.93c.33-.35.71-.44.95-.44.24 0 .48 0 .69.01.22.01.52-.08.81.62.29.72 1 2.45 1.09 2.63.09.18.14.39.03.63-.11.24-.17.39-.34.6-.17.21-.36.47-.51.63-.17.18-.35.37-.15.72.2.35.9 1.48 1.93 2.4 1.33 1.18 2.44 1.55 2.79 1.72.35.18.56.15.77-.09.2-.24.87-1.01 1.1-1.36.23-.35.46-.29.77-.18.32.12 2.02.95 2.37 1.13.35.17.58.26.66.4.1.15.1.86-.19 1.68Z"/></svg>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-base font-extrabold text-white">Chat with us on WhatsApp</p>
+                            <p class="mt-0.5 flex items-center gap-1.5 text-xs font-medium text-white/80">
+                                <span class="h-1.5 w-1.5 rounded-full bg-lime-300"></span>
+                                Usually replies within minutes
+                            </p>
+                        </div>
+                        <svg class="h-5 w-5 shrink-0 text-white/70 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    </a>
+                @endif
             </div>
 
             <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
